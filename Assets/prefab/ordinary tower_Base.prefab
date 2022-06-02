@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4927615857016589476}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Orb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
   _speed: 15
   _rotationSpeed: 16
   _offset: -1
-  _movePosition: {x: 1, y: 0, z: 1}
+  destroyOffset: 7
 --- !u!1 &5234028644035768002
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,7 +142,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5234028644035768002}
-  m_LocalRotation: {x: 0.048996612, y: 0.70540726, z: 0.70540726, w: -0.0489966}
+  m_LocalRotation: {x: 0.048999023, y: 0.705407, z: 0.705407, w: -0.048999023}
   m_LocalPosition: {x: 1.4483691, y: 0, z: 9.657294}
   m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children:
@@ -240,4 +240,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2d554c2e81eb6544855585585e240ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyOffset: 15

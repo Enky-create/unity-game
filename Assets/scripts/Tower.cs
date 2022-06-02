@@ -12,7 +12,7 @@ public class Tower : MonoBehaviour
     {
         //destroyPosition = new Vector3(transform.position.x + destroyOffset, 0,
         //    transform.position.y + destroyOffset);
-        _orb = GameObject.Find("Sphere");
+        _orb = GameObject.FindGameObjectWithTag("Orb");
     }
 
     // Update is called once per frame

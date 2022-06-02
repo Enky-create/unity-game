@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Orb : MonoBehaviour
 {
-    public float _damage = 20.0f;
+    public float _damage = 200.0f;
     public float _angle = 35.0f;
     public float _speed = 10.0f;
     public float _rotationSpeed = 10.0f;
@@ -29,6 +29,14 @@ public class Orb : MonoBehaviour
             (transform.position.z > destroyPosition.z))
         {
             Destroy(gameObject);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("suka");
+            Destroy(other.gameObject);
         }
     }
 }

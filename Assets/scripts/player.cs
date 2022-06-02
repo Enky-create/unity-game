@@ -24,4 +24,11 @@ public class player : MonoBehaviour
         health += damage;
         healthCount.text = health.ToString();
     }
+     void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Orb"))
+        {
+            Debug.Log("blyat");
+        }
+    }
 }

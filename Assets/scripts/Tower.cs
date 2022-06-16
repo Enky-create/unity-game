@@ -4,26 +4,49 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    private GameObject _orb;
-    private Vector3 destroyPosition;
-    //public float destroyOffset = 1.0f;
-    // Start is called before the first frame update
+    [SerializeField] private Renderer _renderer;
+    public Vector2Int size = Vector2Int.one;
+    [SerializeField] private Orb _orb;
+    public void SetTransparent (bool isAvailable)
+    {
+        if (isAvailable)
+        {
+            _renderer.material.color =  Color.green;
+        }
+        else
+        {
+            _renderer.material.color = Color.red;
+        }
+    }
+    public void SetNormalColor()
+    {
+        _renderer.material.color = Color.white;
+    }
+
+    private void OnDrawGizmos()
+    {
+        for (int x=0; x<size.x; x++)
+        {
+            for(int y=0; y < size.y; y++)
+            {
+                Gizmos.color = Color.cyan;
+                Gizmos.DrawCube(transform.position + new Vector3(x, 0, y), new Vector3(1, .1f, 1));
+            }
+        }
+    }
     void Start()
     {
-        //destroyPosition = new Vector3(transform.position.x + destroyOffset, 0,
-        //    transform.position.y + destroyOffset);
-        _orb = GameObject.FindGameObjectWithTag("Orb");
+        InvokeRepeating("SpawnOrb",1f,1f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if ((_orb.transform.position.x > destroyPosition.x) &&
-        //    (_orb.transform.position.z > destroyPosition.z))
-        //{
-        //    Destroy(_orb);
-        //}
+       
 
     }
-
+    void SpawnOrb()
+    {
+        Instantiate(_orb, transform.position+new Vector3(0,4,0), Quaternion.identity);
+    }
 }

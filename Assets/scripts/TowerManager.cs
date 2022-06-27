@@ -8,13 +8,17 @@ public class TowerManager : MonoBehaviour
     [SerializeField] private Tower _flyingTower;
     private Tower[,] _towers;
     private Camera _mainCamera;
+    private BattleOperator _operator;
     void Awake()
     {
         _mainCamera = Camera.main;
+        
+        _operator = new BattleOperator(_mainCamera);
         _towers = new Tower[_gridSize.x, _gridSize.y];
     }
     public void StartPlacingTower(Tower towerPrefab)
     {
+        _operator.MoveCamera();
         if (_flyingTower != null)
         {
             Destroy(_flyingTower.gameObject);
@@ -81,6 +85,7 @@ private void PlaceTower(int placeX, int placeY)
             }
         }
         _flyingTower.SetNormalColor();
+        _operator.ResetCamera();
         _flyingTower = null;
     }
 }

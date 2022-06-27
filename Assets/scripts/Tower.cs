@@ -47,6 +47,6 @@ public class Tower : MonoBehaviour
     }
     void SpawnOrb()
     {
-        Instantiate(_orb, transform.position+new Vector3(0,4,0), Quaternion.identity);
+        Instantiate(_orb, transform.position+new Vector3(-size.x, 4, size.y/2), Quaternion.identity);
     }
 }

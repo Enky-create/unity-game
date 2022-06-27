@@ -8,7 +8,7 @@ public class Orb : MonoBehaviour
     private IMovable _move;
     private Vector3 destroyPosition;
     private float _destroyRadius = 4f;
-    private void Start()
+    private void Awake()
     {
         _move = new SpiralTrajectory(transform);
         destroyPosition = new Vector3(transform.position.x + _destroyRadius, 0,

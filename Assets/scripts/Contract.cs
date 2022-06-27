@@ -6,3 +6,8 @@ public interface IMovable
 {
     void Move();
 }
+public interface IOperator
+{
+    void MoveCamera();
+    void ResetCamera();
+}

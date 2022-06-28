@@ -5,8 +5,14 @@ using UnityEngine;
 public class Tower : MonoBehaviour
 {
     [SerializeField] private Renderer _renderer;
-    public Vector2Int size = Vector2Int.one;
     [SerializeField] private Orb _orb;
+    public Vector2Int size = Vector2Int.one;
+    [SerializeField] public Cell _cell;
+    public ICellConstructor _cellConstructor;
+    private void Awake()
+    {
+        _cellConstructor = new CrossCellsConstructor();
+    }
     public void SetTransparent (bool isAvailable)
     {
         if (isAvailable)
@@ -47,6 +53,7 @@ public class Tower : MonoBehaviour
     }
     void SpawnOrb()
     {
+        _orb.SetDamage(50);
         Instantiate(_orb, transform.position+new Vector3(-size.x, 4, size.y/2), Quaternion.identity);
     }
 }

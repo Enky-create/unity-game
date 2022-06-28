@@ -31,4 +31,11 @@ public class Orb : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    public void SetDamage(float damage)
+    {
+        if (damage >  0)
+        {
+            _damage = damage;
+        }
+    }
 }

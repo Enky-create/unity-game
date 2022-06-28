@@ -24,6 +24,7 @@ public class TowerManager : MonoBehaviour
             Destroy(_flyingTower.gameObject);
         }
         _flyingTower = Instantiate(towerPrefab);
+        
     }
     // Update is called once per frame
     void Update()
@@ -86,6 +87,7 @@ private void PlaceTower(int placeX, int placeY)
         }
         _flyingTower.SetNormalColor();
         _operator.ResetCamera();
+        _flyingTower._cellConstructor.Set(_gridSize, _flyingTower);
         _flyingTower = null;
     }
 }

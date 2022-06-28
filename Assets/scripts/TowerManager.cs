@@ -38,9 +38,10 @@ public class TowerManager : MonoBehaviour
                 Vector3 worldPosition = ray.GetPoint(position);
                 int x = Mathf.RoundToInt(worldPosition.x);
                 int y = Mathf.RoundToInt(worldPosition.z);
-
+                
                 bool isAvailable = true;
-                if(x <= 0 || x > _gridSize.x - _flyingTower.size.x)
+                isAvailable = _flyingTower.isPlaceGood;
+                if (x <= 0 || x > _gridSize.x - _flyingTower.size.x)
                 {
                     isAvailable = false;
                 }
@@ -50,12 +51,17 @@ public class TowerManager : MonoBehaviour
                     isAvailable = false;
                 }
 
-                if(isAvailable && IsPlacetaken(x, y))
+                
+
+                if (isAvailable && IsPlacetaken(x, y))
                 {
                     isAvailable = false;
                 }
 
+                
+
                 _flyingTower.transform.position = new Vector3(x,0,y);
+               
                 _flyingTower.SetTransparent(isAvailable);
 
                 if (isAvailable && Input.GetMouseButtonUp(0))

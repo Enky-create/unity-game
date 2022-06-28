@@ -9,6 +9,7 @@ public class Tower : MonoBehaviour
     public Vector2Int size = Vector2Int.one;
     [SerializeField] public Cell _cell;
     public ICellConstructor _cellConstructor;
+    public bool isPlaceGood = false;
     private void Awake()
     {
         _cellConstructor = new CrossCellsConstructor();
@@ -28,7 +29,21 @@ public class Tower : MonoBehaviour
     {
         _renderer.material.color = Color.white;
     }
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Cell"))
+        {
+            isPlaceGood = true;
+        }
+        
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Cell"))
+        {
+            isPlaceGood = false;
+        }
+    }
     private void OnDrawGizmos()
     {
         for (int x=0; x<size.x; x++)
@@ -40,20 +55,20 @@ public class Tower : MonoBehaviour
             }
         }
     }
-    void Start()
-    {
-        InvokeRepeating("SpawnOrb",1f,1f);
-    }
+    //void Start()
+    //{
+    //    InvokeRepeating("SpawnOrb",1f,1f);
+    //}
 
     // Update is called once per frame
-    void Update()
-    {
+    //void Update()
+    //{
        
 
-    }
-    void SpawnOrb()
-    {
-        _orb.SetDamage(50);
-        Instantiate(_orb, transform.position+new Vector3(-size.x, 4, size.y/2), Quaternion.identity);
-    }
+    //}
+    //void SpawnOrb()
+    //{
+    //    _orb.SetDamage(50);
+    //    Instantiate(_orb, transform.position+new Vector3(-size.x, 4, size.y/2), Quaternion.identity);
+    //}
 }

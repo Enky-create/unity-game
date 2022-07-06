@@ -15,4 +15,5 @@ public interface ICellConstructor
 {
     void Show(Vector2Int gridSize, Tower tower);
     void Set(Vector2Int gridSize, Tower tower);
+    void Destroy();
 }

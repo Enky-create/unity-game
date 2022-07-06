@@ -29,7 +29,7 @@ public class Tower : MonoBehaviour
     {
         _renderer.material.color = Color.white;
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerStay(Collider collision)
     {
         if (collision.gameObject.CompareTag("Cell"))
         {
@@ -37,7 +37,8 @@ public class Tower : MonoBehaviour
         }
         
     }
-    private void OnCollisionExit(Collision collision)
+    
+    private void OnTriggerExit(Collider collision)
     {
         if (collision.gameObject.CompareTag("Cell"))
         {

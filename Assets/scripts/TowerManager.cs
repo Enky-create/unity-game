@@ -6,9 +6,11 @@ public class TowerManager : MonoBehaviour
 {
     [SerializeField] private Vector2Int _gridSize = new Vector2Int(162, 27);
     [SerializeField] private Tower _flyingTower;
+    private Tower _settedTower;
     private Tower[,] _towers;
     private Camera _mainCamera;
     private BattleOperator _operator;
+    private bool _isFirstTower = true;
     void Awake()
     {
         _mainCamera = Camera.main;
@@ -18,6 +20,7 @@ public class TowerManager : MonoBehaviour
     }
     public void StartPlacingTower(Tower towerPrefab)
     {
+        
         _operator.MoveCamera();
         if (_flyingTower != null)
         {
@@ -40,7 +43,7 @@ public class TowerManager : MonoBehaviour
                 int y = Mathf.RoundToInt(worldPosition.z);
                 
                 bool isAvailable = true;
-                isAvailable = _flyingTower.isPlaceGood;
+                isAvailable = _flyingTower.isPlaceGood || _isFirstTower;
                 if (x <= 0 || x > _gridSize.x - _flyingTower.size.x)
                 {
                     isAvailable = false;
@@ -58,7 +61,7 @@ public class TowerManager : MonoBehaviour
                     isAvailable = false;
                 }
 
-                
+                _flyingTower._cellConstructor.Show(_gridSize, _flyingTower);
 
                 _flyingTower.transform.position = new Vector3(x,0,y);
                
@@ -84,6 +87,12 @@ private bool IsPlacetaken(int placeX, int placeY)
     }
 private void PlaceTower(int placeX, int placeY)
     {
+        _isFirstTower = false;
+        if (_settedTower != null)
+        {
+            _settedTower._cellConstructor.Destroy();
+            _settedTower = null;
+        }
         for (int x = 0; x<_flyingTower.size.x; x++)
         {
             for (int y = 0; y < _flyingTower.size.y; y++)
@@ -93,7 +102,8 @@ private void PlaceTower(int placeX, int placeY)
         }
         _flyingTower.SetNormalColor();
         _operator.ResetCamera();
-        _flyingTower._cellConstructor.Set(_gridSize, _flyingTower);
+       // _flyingTower._cellConstructor.Set(_gridSize, _flyingTower);
+        _settedTower = _flyingTower;
         _flyingTower = null;
     }
 }

@@ -2,23 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower : MonoBehaviour
+public abstract class Tower : MonoBehaviour
 {
+    [SerializeField] protected float _health;
+    [SerializeField] public Vector2Int size = Vector2Int.one;
     [SerializeField] private Renderer _renderer;
-    [SerializeField] private Orb _orb;
-    public Vector2Int size = Vector2Int.one;
-    [SerializeField] public Cell _cell;
-    public ICellConstructor _cellConstructor;
-    public bool isPlaceGood = false;
+    public bool isActive = false;
+
+    //[SerializeField] private Orb _orb;
+    //[SerializeField] public Cell _cell;
+    //public ICellConstructor _cellConstructor;
+
     private void Awake()
     {
-        _cellConstructor = new CrossCellsConstructor();
+       // _cellConstructor = new CrossCellsConstructor();
     }
     public void SetTransparent (bool isAvailable)
     {
         if (isAvailable)
         {
-            _renderer.material.color =  Color.green;
+            _renderer.material.color =  Color.yellow;
         }
         else
         {
@@ -33,16 +36,15 @@ public class Tower : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Cell"))
         {
-            isPlaceGood = true;
+            isActive = true;
         }
         
     }
-    
     private void OnTriggerExit(Collider collision)
     {
         if (collision.gameObject.CompareTag("Cell"))
         {
-            isPlaceGood = false;
+            isActive = false;
         }
     }
     private void OnDrawGizmos()
@@ -56,6 +58,8 @@ public class Tower : MonoBehaviour
             }
         }
     }
+    public virtual void UseSkill() { }
+    public virtual void DeactivateSkill() { }
     //void Start()
     //{
     //    InvokeRepeating("SpawnOrb",1f,1f);
@@ -64,7 +68,7 @@ public class Tower : MonoBehaviour
     // Update is called once per frame
     //void Update()
     //{
-       
+
 
     //}
     //void SpawnOrb()

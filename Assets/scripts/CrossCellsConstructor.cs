@@ -2,59 +2,85 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrossCellsConstructor :  ICellConstructor 
+public class CrossCellsConstructor : ISkillable
 {
-    private Cell _cellX;
-    private Cell _cellY;
+    private Transform transform;
+    private Vector2Int size;
+    private Cell _original;
+    private Cell _cellLeft;
+    private Cell _cellTop;
+    private Cell _cellRight;
+    private Cell _cellBottom;
 
-    public void Destroy()
+    public void Deactivate()
     {
-        if(_cellX != null)
+        if(_cellLeft != null)
         {
-            MonoBehaviour.Destroy(_cellX.gameObject);
+            MonoBehaviour.Destroy(_cellLeft.gameObject);
         }
-        if (_cellY != null)
+        if (_cellTop != null)
         {
-            MonoBehaviour.Destroy(_cellY.gameObject);
+            MonoBehaviour.Destroy(_cellTop.gameObject);
         }
-        
-    }
-
-    public void Show(Vector2Int gridSize, Tower tower)
-    {
-        //for (float x = 0; x < gridSize.x; x+=2f)
-        //{
-        //    MonoBehaviour.Instantiate(tower._cell,
-        //        new Vector3(x, 0.01f, tower.transform.position.z),
-        //        Quaternion.identity);
-        //}
-        //for (float y = 0; y < gridSize.y; y += 2f)
-        //{
-        //    MonoBehaviour.Instantiate(tower._cell,
-        //        new Vector3(tower.transform.position.x, 0.01f, y),
-        //        Quaternion.identity);
-        //}
-        Destroy();
-        var cell = tower._cell;
-        var positionX = tower.transform.position.x;
-        var positionY = tower.transform.position.y;
-        cell.transform.localScale = new Vector3(gridSize.x, 0.01f,1);
-         _cellX = MonoBehaviour.Instantiate(cell,
-                new Vector3(gridSize.x / 2, 0.01f, tower.transform.position.z),
-                Quaternion.identity);
-
-         _cellY = MonoBehaviour.Instantiate(tower._cell,
-                new Vector3(tower.transform.position.x, 0.01f, gridSize.y / 2),
-                 Quaternion.Euler(0,90,0));
-    }
-
-    public void Set(Vector2Int gridSize, Tower tower)
-    {
-        if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+        if (_cellRight != null)
         {
-            
-            Show(gridSize, tower);
-            
+            MonoBehaviour.Destroy(_cellRight.gameObject);
+        }
+        if (_cellBottom != null)
+        {
+            MonoBehaviour.Destroy(_cellBottom.gameObject);
         }
     }
+
+    public void Activate()
+    {
+        var gridSize = TowerManager.GetGridSize();
+        var cell = _original;
+        var positionX = transform.position.x;
+        var positionY = transform.position.y;
+        var leftSize =  transform.position.x - size.x;
+        var RightSize = gridSize.x -transform.transform.position.x;
+        var UpSize = gridSize.y - size.y - transform.position.z;
+        var BottomSize = transform.position.z - size.y;
+
+        // leftCell
+        cell.transform.localScale = new Vector3(leftSize, 0.01f, 1);
+        _cellLeft = MonoBehaviour.Instantiate(cell,
+               new Vector3(transform.position.x- size.x - leftSize/2, 
+               0.01f, 
+               transform.position.z),
+               Quaternion.identity);
+        // RightCell
+        cell.transform.localScale = new Vector3(RightSize, 0.01f, 1);
+        _cellRight = MonoBehaviour.Instantiate(cell,
+               new Vector3(transform.position.x + size.x + RightSize / 2,
+               0.01f,
+               transform.position.z),
+               Quaternion.identity);
+
+        // UpCell
+        cell.transform.localScale = new Vector3(UpSize, 0.01f, 1);
+        _cellTop = MonoBehaviour.Instantiate(_original,
+                new Vector3(transform.position.x,
+                0.01f, 
+                transform.position.z + size.y + UpSize / 2),
+                 Quaternion.Euler(0, 90, 0));
+        // BottomCell
+        cell.transform.localScale = new Vector3(BottomSize, 0.01f, 1);
+        _cellBottom = MonoBehaviour.Instantiate(_original,
+                new Vector3(transform.position.x,
+                0.01f,
+               transform.position.z - size.y - BottomSize / 2),
+                 Quaternion.Euler(0, 90, 0));
+    }
+
+    public CrossCellsConstructor(Cell cell,
+        Transform transform,
+        Vector2Int size)
+    {
+        _original = cell;
+        this.transform = transform;
+        this.size = size;
+    }
+
 }

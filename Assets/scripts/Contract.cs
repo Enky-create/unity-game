@@ -13,7 +13,11 @@ public interface IOperator
 }
 public interface ICellConstructor
 {
-    void Show(Vector2Int gridSize, Tower tower);
-    void Set(Vector2Int gridSize, Tower tower);
+    void Set(Transform transform, Vector2Int size);
     void Destroy();
+}
+public interface ISkillable
+{
+    void Activate();
+    void Deactivate();
 }

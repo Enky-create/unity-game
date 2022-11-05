@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 5536712769007556458}
   - component: {fileID: 3569382806136018461}
   - component: {fileID: -4956633034315064474}
+  - component: {fileID: 3762883051191248839}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4723820609968915984
 Transform:
@@ -81,6 +82,18 @@ MonoBehaviour:
   _renderer: {fileID: 6219458374675189285}
   isActive: 0
   _cell: {fileID: 4897067925712102185, guid: 9766d44bf9448b14889e770ec526d0a8, type: 3}
+--- !u!114 &3762883051191248839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4723820609968915985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bbc31ac836784f44a6709fde10615bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5570680063318847472
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +110,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5045395716374541642
 Transform:

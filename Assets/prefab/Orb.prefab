@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Orb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7523757318982429624
 Transform:
@@ -107,12 +107,13 @@ GameObject:
   m_Component:
   - component: {fileID: 7523757319282346215}
   - component: {fileID: 7523757319282346218}
+  - component: {fileID: 1470361184368678708}
   m_Layer: 0
   m_Name: Orb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7523757319282346215
 Transform:
@@ -143,3 +144,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 20
+--- !u!114 &1470361184368678708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7523757319282346217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bbc31ac836784f44a6709fde10615bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
